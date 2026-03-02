@@ -10,6 +10,9 @@ build
 .env.*
 !.env.example
 
+# Coverage
+coverage
+
 # Logs
 logs
 *.log
