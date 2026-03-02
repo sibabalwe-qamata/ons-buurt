@@ -1,6 +1,5 @@
 import { IsEnum, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
-
-export type IncidentReportType = 'theft' | 'suspicious' | 'road' | 'safe';
+import { IncidentReportType } from '../../domain/types/incident.types';
 
 export class CreateIncidentDto {
   @IsEnum(['theft', 'suspicious', 'road', 'safe'])

@@ -5,10 +5,10 @@ import {
   CreateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { BuddyGroupMember } from './buddy-group-member.entity';
+import { BuddyGroupMemberSchema } from './buddy-group-member.schema';
 
 @Entity('buddy_groups')
-export class BuddyGroup {
+export class BuddyGroupSchema {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -33,6 +33,6 @@ export class BuddyGroup {
   @CreateDateColumn()
   created_at: Date;
 
-  @OneToMany(() => BuddyGroupMember, (m) => m.group)
-  members: BuddyGroupMember[];
+  @OneToMany(() => BuddyGroupMemberSchema, (m) => m.group)
+  members: BuddyGroupMemberSchema[];
 }

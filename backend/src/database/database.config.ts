@@ -1,8 +1,8 @@
 import { parse } from 'pg-connection-string';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Incident } from '../incidents/entities/incident.entity';
-import { BuddyGroup } from '../buddy/entities/buddy-group.entity';
-import { BuddyGroupMember } from '../buddy/entities/buddy-group-member.entity';
+import { IncidentSchema } from '../incidents/infrastructure/persistence/incident.schema';
+import { BuddyGroupSchema } from '../buddy/infrastructure/persistence/buddy-group.schema';
+import { BuddyGroupMemberSchema } from '../buddy/infrastructure/persistence/buddy-group-member.schema';
 
 /**
  * Parse DATABASE_URL and return TypeORM config with password explicitly as string.
@@ -13,7 +13,7 @@ import { BuddyGroupMember } from '../buddy/entities/buddy-group-member.entity';
  */
 export function getDatabaseConfig(): TypeOrmModuleOptions {
   const url = process.env.DATABASE_URL;
-  const entities = [Incident, BuddyGroup, BuddyGroupMember];
+  const entities = [IncidentSchema, BuddyGroupSchema, BuddyGroupMemberSchema];
 
   if (!url || typeof url !== 'string') {
     return {

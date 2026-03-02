@@ -5,12 +5,17 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import {
+  IncidentReportType,
+  IncidentMapType,
+} from '../../domain/types/incident.types';
 
-export type IncidentReportType = 'theft' | 'suspicious' | 'road' | 'safe';
-export type IncidentMapType = 'safe' | 'warning' | 'danger';
-
+/**
+ * TypeORM persistence schema - infrastructure concern.
+ * Maps to the incidents table.
+ */
 @Entity('incidents')
-export class Incident {
+export class IncidentSchema {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 

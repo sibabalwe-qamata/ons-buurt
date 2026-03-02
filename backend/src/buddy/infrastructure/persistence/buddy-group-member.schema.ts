@@ -6,19 +6,19 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { BuddyGroup } from './buddy-group.entity';
+import { BuddyGroupSchema } from './buddy-group.schema';
 
 @Entity('buddy_group_members')
-export class BuddyGroupMember {
+export class BuddyGroupMemberSchema {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ type: 'uuid' })
   group_id: string;
 
-  @ManyToOne(() => BuddyGroup, (g) => g.members, { onDelete: 'CASCADE' })
+  @ManyToOne(() => BuddyGroupSchema, (g) => g.members, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'group_id' })
-  group: BuddyGroup;
+  group: BuddyGroupSchema;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   member_name: string | null;
