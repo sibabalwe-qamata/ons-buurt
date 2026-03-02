@@ -2,6 +2,8 @@
 
 NestJS API backend for the Ons Buurt community safety platform.
 
+**Architecture:** This project uses [Hexagonal Architecture](docs/ARCHITECTURE.md) (Ports & Adapters). See the [architecture documentation](docs/ARCHITECTURE.md) for structure, benefits, and references.
+
 ## Doppler Setup
 
 This project uses [Doppler](https://doppler.com) for secrets management. Follow the [Install CLI](https://docs.doppler.com/docs/install-cli) guide to get started.
