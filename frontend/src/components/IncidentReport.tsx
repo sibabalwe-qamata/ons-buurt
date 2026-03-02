@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AlertTriangle, MapPin, Camera, Send } from "lucide-react";
+import { AlertTriangle, MapPin, Camera, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { api } from "@/lib/api";
 
 const incidentTypes = [
   { value: "theft", label: "Theft / Mugging", emoji: "🚨" },
@@ -19,16 +20,34 @@ const IncidentReport = () => {
   const [selectedType, setSelectedType] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Report Submitted ✅",
-      description: "Your report has been shared with the community for verification.",
-    });
-    setSelectedType("");
-    setDescription("");
-    setLocation("");
+    if (!selectedType) return;
+    setIsSubmitting(true);
+    try {
+      await api.incidents.create({
+        type: selectedType as "theft" | "suspicious" | "road" | "safe",
+        location,
+        description: description || undefined,
+      });
+      toast({
+        title: "Report Submitted ✅",
+        description: "Your report has been shared with the community for verification.",
+      });
+      setSelectedType("");
+      setDescription("");
+      setLocation("");
+    } catch (err) {
+      toast({
+        title: "Submission failed",
+        description: err instanceof Error ? err.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -129,8 +148,12 @@ const IncidentReport = () => {
             </div>
 
             <div className="flex gap-3">
-              <Button type="submit" className="flex-1" disabled={!selectedType}>
-                <Send className="w-4 h-4 mr-2" />
+              <Button type="submit" className="flex-1" disabled={!selectedType || isSubmitting}>
+                {isSubmitting ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4 mr-2" />
+                )}
                 Submit Report
               </Button>
               <Button type="button" variant="outline" size="icon">
