@@ -13,6 +13,16 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    proxy: {
+      "/incidents": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+      "/buddy-groups": {
+        target: "http://localhost:3001",
+        changeOrigin: true,
+      },
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
