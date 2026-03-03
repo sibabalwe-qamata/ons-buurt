@@ -1,0 +1,9 @@
+# Doppler CLI configuration for ons-buurt backend
+# https://docs.doppler.com/docs/install-cli
+#
+# Run `doppler setup` in this directory to authenticate and select project/config.
+# Then run: doppler run -- npm run start:dev
+#
+setup:
+  - project: ons-buurt
+    config: dev

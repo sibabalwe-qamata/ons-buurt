@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AlertTriangle, MapPin, Camera, Send } from "lucide-react";
+import { AlertTriangle, Camera, Loader2, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { api } from "@/lib/api";
 
 const incidentTypes = [
   { value: "theft", label: "Theft / Mugging", emoji: "🚨" },
@@ -19,23 +20,40 @@ const IncidentReport = () => {
   const [selectedType, setSelectedType] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Report Submitted ✅",
-      description: "Your report has been shared with the community for verification.",
-    });
-    setSelectedType("");
-    setDescription("");
-    setLocation("");
+    if (!selectedType) return;
+    setIsSubmitting(true);
+    try {
+      await api.incidents.create({
+        type: selectedType as "theft" | "suspicious" | "road" | "safe",
+        location,
+        description: description || undefined,
+      });
+      toast({
+        title: "Report Submitted ✅",
+        description: "Your report has been shared with the community for verification.",
+      });
+      setSelectedType("");
+      setDescription("");
+      setLocation("");
+    } catch (err) {
+      toast({
+        title: "Submission failed",
+        description: err instanceof Error ? err.message : "Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="report" className="py-16 bg-card">
       <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Info */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -70,7 +88,6 @@ const IncidentReport = () => {
             </div>
           </motion.div>
 
-          {/* Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 30 }}
@@ -129,8 +146,12 @@ const IncidentReport = () => {
             </div>
 
             <div className="flex gap-3">
-              <Button type="submit" className="flex-1" disabled={!selectedType}>
-                <Send className="w-4 h-4 mr-2" />
+              <Button type="submit" className="flex-1" disabled={!selectedType || isSubmitting}>
+                {isSubmitting ? (
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                ) : (
+                  <Send className="w-4 h-4 mr-2" />
+                )}
                 Submit Report
               </Button>
               <Button type="button" variant="outline" size="icon">
