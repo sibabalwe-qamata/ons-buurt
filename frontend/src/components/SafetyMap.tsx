@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { motion } from "framer-motion";
-import { MapPin, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { formatDistanceToNow } from "date-fns";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { formatDistanceToNow } from "date-fns";
+import { Filter, MapPin } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { api, type IncidentApi } from "@/lib/api";
 
 const CAPE_FLATS_CENTER = { lat: -34.034, lng: 18.555 };
@@ -124,7 +124,6 @@ const SafetyMap = () => {
           </p>
         </motion.div>
 
-        {/* Filters */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
           <Filter className="w-4 h-4 text-muted-foreground" />
           {(["all", "safe", "warning", "danger"] as const).map((f) => (
@@ -144,12 +143,10 @@ const SafetyMap = () => {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          {/* Map */}
           <div className="lg:col-span-2 rounded-xl overflow-hidden border shadow-lg h-[450px]">
             <div ref={mapRef} className="w-full h-full" />
           </div>
 
-          {/* Feed */}
           <div className="space-y-3 max-h-[450px] overflow-y-auto pr-1">
             <h3 className="font-heading font-semibold text-foreground text-lg sticky top-0 bg-background pb-2">
               Live Feed

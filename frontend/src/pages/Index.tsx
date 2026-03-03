@@ -1,9 +1,9 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import SafetyMap from "@/components/SafetyMap";
-import IncidentReport from "@/components/IncidentReport";
-import WalkingBuddy from "@/components/WalkingBuddy";
 import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
+import IncidentReport from "@/components/IncidentReport";
+import Navbar from "@/components/Navbar";
+import SafetyMap from "@/components/SafetyMap";
+import WalkingBuddy from "@/components/WalkingBuddy";
 
 const Index = () => {
   return (

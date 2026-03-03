@@ -1,4 +1,4 @@
-import { Shield, Heart } from "lucide-react";
+import { Heart, Shield } from "lucide-react";
 
 const Footer = () => {
   return (
