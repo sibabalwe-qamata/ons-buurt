@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
-import { Shield, Users, MapPin } from "lucide-react";
+import { MapPin, Shield, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background image */}
       <div className="absolute inset-0">
         <img
           src={heroBg}
@@ -62,7 +61,6 @@ const Hero = () => {
             </Button>
           </div>
 
-          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

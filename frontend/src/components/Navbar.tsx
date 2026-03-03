@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Menu, X, MapPin, AlertTriangle, Users } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { AlertTriangle, MapPin, Menu, Shield, Users, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
@@ -24,7 +24,6 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
           {navItems.map((item) => (
             <a
@@ -41,7 +40,6 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors text-foreground"
@@ -50,7 +48,6 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
