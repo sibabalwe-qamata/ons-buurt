@@ -14,6 +14,14 @@ import { BuddyGroupMemberSchema } from '../buddy/infrastructure/persistence/budd
 export function getDatabaseConfig(): TypeOrmModuleOptions {
   const url = process.env.DATABASE_URL;
   const entities = [IncidentSchema, BuddyGroupSchema, BuddyGroupMemberSchema];
+  const migrations = ['dist/database/migrations/*.js'];
+
+  const base = {
+    entities,
+    migrations,
+    migrationsRun: true,
+    synchronize: false,
+  };
 
   if (!url || typeof url !== 'string') {
     return {
@@ -23,9 +31,8 @@ export function getDatabaseConfig(): TypeOrmModuleOptions {
       username: 'postgres',
       password: '',
       database: 'ons_buurt',
-      entities,
-      synchronize: process.env.NODE_ENV !== 'production',
       ssl: false,
+      ...base,
     };
   }
 
@@ -38,8 +45,7 @@ export function getDatabaseConfig(): TypeOrmModuleOptions {
     username: String(parsed.user ?? 'postgres'),
     password: String(parsed.password ?? ''),
     database: String(parsed.database ?? 'ons_buurt'),
-    entities,
-    synchronize: process.env.NODE_ENV !== 'production',
     ssl: url.includes('sslmode=require') ? { rejectUnauthorized: false } : false,
+    ...base,
   };
 }
