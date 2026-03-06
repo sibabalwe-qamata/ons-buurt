@@ -1,0 +1,12 @@
+# Render Blueprint - Backend service
+# https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: ons-buurt-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    envVars:
+      - key: NODE_ENV
+        value: production
