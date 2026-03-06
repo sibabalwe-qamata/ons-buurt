@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { api, type IncidentApi } from "@/lib/api";
 
+const SOUTH_AFRICA_CENTER = { lat: -29, lng: 24 };
 const CAPE_FLATS_CENTER = { lat: -34.034, lng: 18.555 };
 
 function toMapIncident(i: IncidentApi) {
@@ -56,8 +57,8 @@ const SafetyMap = () => {
     if (!mapRef.current || mapInstanceRef.current) return;
 
     const map = L.map(mapRef.current, {
-      center: [CAPE_FLATS_CENTER.lat, CAPE_FLATS_CENTER.lng],
-      zoom: 15,
+      center: [SOUTH_AFRICA_CENTER.lat, SOUTH_AFRICA_CENTER.lng],
+      zoom: 6,
       zoomControl: false,
     });
 
@@ -106,6 +107,17 @@ const SafetyMap = () => {
       markersRef.current.push(marker);
     });
   }, [filteredIncidents]);
+
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map || !selectedIncident) return;
+
+    map.flyTo([selectedIncident.lat, selectedIncident.lng], 14, { duration: 0.5 });
+    const idx = filteredIncidents.findIndex((i) => i.id === selectedIncident.id);
+    if (idx >= 0 && markersRef.current[idx]) {
+      markersRef.current[idx].openPopup();
+    }
+  }, [selectedIncident, filteredIncidents]);
 
   return (
     <section id="map" className="py-16 bg-background">

@@ -8,10 +8,10 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     passWithNoTests: true,
-    setupFiles: ["./frontend/src/test/setup.ts"],
-    include: ["frontend/src/**/*.{test,spec}.{ts,tsx}"],
+    setupFiles: ["./src/test/setup.ts"],
+    include: ["src/**/*.{test,spec}.{ts,tsx}"],
   },
   resolve: {
-    alias: { "@": path.resolve(__dirname, "frontend/src") },
+    alias: { "@": path.resolve(__dirname, "./src") },
   },
 });
