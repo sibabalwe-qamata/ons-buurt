@@ -17,16 +17,24 @@ Community-powered safety for the Cape Flats. Report incidents, find safe zones, 
 ### Run the application
 
 ```bash
-# Install dependencies
+# Install dependencies (root, frontend, backend)
 npm install
-cd backend && npm install
+cd frontend && npm install
+cd ../backend && npm install
+cd ..
 ```
 
-Run frontend and backend in separate terminals:
+Run both frontend and backend together:
+
+```bash
+npm run dev
+```
+
+Or run separately:
 
 ```bash
 # Terminal 1 - Frontend
-npm run dev
+npm run dev:frontend
 
 # Terminal 2 - Backend (requires Doppler + DATABASE_URL)
 cd backend && doppler run -- npm run start:dev
