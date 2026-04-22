@@ -39,6 +39,8 @@ npm run dev:frontend
 # Terminal 2 - Backend (requires Doppler + DATABASE_URL)
 cd backend && doppler run -- npm run start:dev
 ```
+### Demo Video/Screencast
+- **[Demo](https://go.screenpal.com/watch/cOf3f6nOUEG)** - Video demo
 
 ### Documentation
 
