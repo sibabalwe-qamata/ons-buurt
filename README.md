@@ -1,7 +1,7 @@
 # Ons Buurt
 
-[![Frontend Tests](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml)
-[![Backend Tests](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml)
+![Frontend Tests](https://github.com/sibabalwe-qamata/ons-buurt/actions/workflows/frontend-tests.yml/badge.svg)
+![Backend Tests](https://github.com/sibabalwe-qamata/ons-buurt/actions/workflows/backend-tests.yml/badge.svg)
 
 Community-powered safety for the Cape Flats. Report incidents, find safe zones, and walk together.
 
@@ -39,6 +39,8 @@ npm run dev:frontend
 # Terminal 2 - Backend (requires Doppler + DATABASE_URL)
 cd backend && doppler run -- npm run start:dev
 ```
+### Demo Video/Screencast
+- **[Demo](https://go.screenpal.com/watch/cOf3f6nOUEG)** - Video demo
 
 ### Documentation
 
