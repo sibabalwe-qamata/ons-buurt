@@ -1,7 +1,7 @@
 # Ons Buurt
 
-[![Frontend Tests](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)
-[![Backend Tests](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)](https://github.com/ons-buurt/ons-buurt/actions/workflows/ci.yml/badge.svg)
+![Frontend Tests](https://github.com/sibabalwe-qamata/ons-buurt/actions/workflows/frontend-tests.yml/badge.svg)
+![Backend Tests](https://github.com/sibabalwe-qamata/ons-buurt/actions/workflows/backend-tests.yml/badge.svg)
 
 Community-powered safety for the Cape Flats. Report incidents, find safe zones, and walk together.
 
